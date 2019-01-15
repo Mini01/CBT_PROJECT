@@ -1,9 +1,5 @@
 package com.biz.MavenCBT.service;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -20,12 +16,16 @@ public class CBTService {
 	
 	List<Integer> answerList;
 	List<Integer> noList;
+	List<Integer> AllanswerList;
+	List<Integer> AllnoList;
 	public CBTService(){
 		
 		scan = new Scanner(System.in);
 		factory = new Factory();	
 		answerList = new ArrayList();
 		noList = new ArrayList();
+		AllanswerList = new ArrayList();
+		AllnoList = new ArrayList();
 	}
 	
 	
@@ -147,6 +147,7 @@ public class CBTService {
 		
      	List<CBTVO> vo =  factory.CBTAll();
 		System.out.println(">> 문제풀이를 시작합니다.");
+		System.out.println();
 		Collections.shuffle(vo);
 		
 		int score =0;
@@ -166,17 +167,18 @@ public class CBTService {
 			System.out.println("정답을 고르세요.");
 			String strM = scan.nextLine();
 			int intM = Integer.valueOf(strM);
-			String strbogi = vo.get(i).getCb_answer();
-			
+			String strbogi = vo.get(i).getCb_answer();	
 			if(bogi[intM -1].equals(strbogi)) {
 				System.out.println("정답입니다");
 				answerList.add(i+1);
+				AllanswerList.add(i+1);
 				score +=1;
 				break;
 			}else {
 				System.out.println("오답입니다");
 				if(j ==1) break;
 				noList.add(i+1);
+				AllnoList.add(i+1);
 				System.out.println("한번 더 다시풀어보시겠습니까?");
 				System.out.println();
 				System.out.print("다시푼다 (0을입력) 넘어간다(Enter)");
@@ -223,8 +225,8 @@ public class CBTService {
 			System.out.println("종료합니다");
 			
 			System.out.println("총점수 :" + (score*5));
-			System.out.println("맞은 문항" + answerList);
-			System.out.println("틀린 문항" + noList);
+			System.out.println("맞은 문항" + AllanswerList);
+			System.out.println("틀린 문항" + AllnoList);
 			return;
 			
 		}
