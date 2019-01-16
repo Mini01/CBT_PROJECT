@@ -55,7 +55,6 @@ public class CBTService {
 
 
 	public void management() {
-		// TODO 관리 세부메뉴
 		while (true) {
 			System.out.println("===================================================================");
 			System.out.println("=================정보 처리 기사 시험 문제관리======================");
